@@ -1,7 +1,11 @@
+
+
 window.onload = function alchemy(){
-    var width = 960,
-    height = 260,
+    var width = 1000,
+    height = 700,
     cellSize = 17; // cell size
+
+
 
 var elements = [
     {name: "water", color: "blue"}, 
@@ -15,29 +19,63 @@ var svg = d3.select("body")
     .attr("height", height)
     .append("g");
     
-svg.selectAll("rect")
+svg.append("g").selectAll("rect")
         .data(elements)
         .enter()
         .append("rect")
-        .attr("width", 40)
-        .attr("height", 40)
-        .attr("y", function(d, i){ return i*50;})
-        .attr("fill", function(d){ return d.color;});
+        .attr("width", 60)
+        .attr("height", 60)
+        .attr("y", function(d, i){ return i*70;})
+        .attr("fill", function(d){ return d.color;})
+        .on("click", onElementClick);
+
+svg.append("g").selectAll("rect")
+        .data(elements)
+        .enter()
+        .append("rect")
+        .attr("width", 60)
+        .attr("height", 60)
+        .attr("x", 780)
+        .attr("y", function(d, i){ return i*70;})
+        .attr("fill", function(d){ return d.color;})
+        .on("click", onRightElementClick);
 
 svg       
         .append("g")
         .append("rect")
-        .attr("width", 900)
-        .attr("height", 190)
-        .attr("x", 50)
+        .attr("width", 700)
+        .attr("height", 300)
+        .attr("x", 70)
         .attr("fill", "gray");
 
 svg       
         .append("g")
         .append("rect")
-        .attr("width", 960)
+        .attr("width", 700)
         .attr("height", 50)
-        .attr("y", 200)
+        .attr("x", 70)
+        .attr("y", 310)
         .attr("fill", "yellow");
+
+function onElementClick(d) {
+    svg
+            .append("rect")
+            .attr("width", 60)
+            .attr("height", 60)
+            .attr("x", 100)
+            .attr("y", 110)
+            .attr("fill", function(){ return d.color;})
+}
+
+function onRightElementClick(d) {
+    svg
+            .append("rect")
+            .attr("width", 60)
+            .attr("height", 60)
+            .attr("x", 680)
+            .attr("y", 110)
+            .attr("fill", function(){ return d.color;})
+}
+
 }
 
