@@ -8,7 +8,7 @@ window.onload = function alchemy(){
     var offsetY = 10;
 
 
-
+//groups of elements
 var groups = [
     {name: "water", color: "#87CEFA"}, 
     {name: "fire", color: " #FF4500"},
@@ -17,6 +17,58 @@ var groups = [
     {name: "energy", color: "#A9A9A9"}, 
     {name: "bacteries", color: " #DDA0DD"},
     {name: "animals", color: "#32CD32"}];
+
+//elements in groups 
+//"water"
+groups[0] = [
+    {name: "water", color: "#00BFFF"},
+    {name: "swamp", color: "#006400"},
+    {name: "quicksylver", color: "#C0C0C0"}];
+
+//"fire"
+groups[1] = [
+    {name: "fire", color: "#FF0000"},
+    {name: "lava", color: "#8B0000"}];
+
+//"air"
+groups[2] = [
+    {name: "air", color: "#FF0000"},
+    {name: "steam", color: "#8B0000"},
+    {name: "dust", color: "#8B0000"},
+    {name: "ash", color: "#8B0000"},
+    {name: "storm", color: "#8B0000"}];
+
+//"earth"
+groups[3] = [
+    {name: "earth", color: "#FF0000"},
+    {name: "stone", color: "#8B0000"},
+    {name: "sand", color: "#8B0000"},
+    {name: "glass", color: "#8B0000"},
+    {name: "metal", color: "#8B0000"}];
+
+//"energy"
+groups[4] = [
+    {name: "energy", color: "#FF0000"},
+    {name: "life", color: "#8B0000"},
+    {name: "egg", color: "#8B0000"}];
+
+//"bacteries"
+groups[5] = [
+    {name: "weeds", color: "#FF0000"},
+    {name: "mushroom", color: "#8B0000"},
+    {name: "bacteria", color: "#8B0000"},
+    {name: "plankton", color: "#8B0000"},
+    {name: "worm", color: "#8B0000"}];
+
+//"animals"
+groups[6] = [
+    {name: "fish", color: "#FF0000"},
+    {name: "whale", color: "#8B0000"},
+    {name: "snake", color: "#8B0000"},
+    {name: "bird", color: "#8B0000"},
+    {name: "turtle", color: "#8B0000"},
+    {name: "lizard", color: "#8B0000"}];
+
 
 var svg = d3.select("body")
     .append("svg")
@@ -32,7 +84,7 @@ svg.append("rect")
 
     //Container witn groups on the left
 svg.append("g")
-        .attr("class", "first-elements-container")
+        .attr("class", "first-groups-container")
         .selectAll("rect")
         .data(groups)
         .enter()
@@ -46,7 +98,7 @@ svg.append("g")
 
 //Container witn groups on the right
 svg.append("g")
-        .attr("class", "second-elements-container")
+        .attr("class", "second-groups-container")
         .selectAll("rect")
         .data(groups)
         .enter()
@@ -58,7 +110,7 @@ svg.append("g")
         .attr("fill", function(d){ return d.color;})
         .on("click", onRightGroupClick);
 
-//игровое поле
+//game field
 svg       
         .append("g")
         .append("rect")
@@ -68,7 +120,7 @@ svg
         .attr("y", offsetY)
         .attr("fill", "#FFFFE0");
 
-//последнее действие
+//last recipe
 svg       
         .append("g")
         .append("rect")
@@ -80,6 +132,7 @@ svg
 
 //elements on the left
 function onGroupClick(d) {
+    //display group on the game field
     svg
             .append("rect")
             .attr("width", 60)
