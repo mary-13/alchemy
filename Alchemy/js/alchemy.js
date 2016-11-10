@@ -9,7 +9,7 @@ window.onload = function alchemy(){
 
 
 
-var elements = [
+var groups = [
     {name: "water", color: "#87CEFA"}, 
     {name: "fire", color: " #FF4500"},
     {name: "air", color: "#F8F8FF"},
@@ -24,15 +24,17 @@ var svg = d3.select("body")
     .attr("height", height)
     .append("g");
     
+    //filling body with the color
 svg.append("rect")
     .attr("width", "100%")
     .attr("height", "100%")
     .attr("fill", "#000000");
-    
+
+    //Container witn groups on the left
 svg.append("g")
         .attr("class", "first-elements-container")
         .selectAll("rect")
-        .data(elements)
+        .data(groups)
         .enter()
         .append("rect")
         .attr("width", 45)
@@ -40,12 +42,13 @@ svg.append("g")
         .attr("x", offsetX)
         .attr("y", function(d, i) {return i*55 + offsetY})
         .attr("fill", function(d){return d.color;})
-        .on("click", onElementClick);
+        .on("click", onGroupClick);
 
+//Container witn groups on the right
 svg.append("g")
         .attr("class", "second-elements-container")
         .selectAll("rect")
-        .data(elements)
+        .data(groups)
         .enter()
         .append("rect")
         .attr("width", 45)
@@ -53,7 +56,7 @@ svg.append("g")
         .attr("x", 780 + offsetX)
         .attr("y", function(d, i) {return i*55 + offsetY})
         .attr("fill", function(d){ return d.color;})
-        .on("click", onRightElementClick);
+        .on("click", onRightGroupClick);
 
 //игровое поле
 svg       
@@ -76,7 +79,7 @@ svg
         .attr("fill", "#DAA520");
 
 //elements on the left
-function onElementClick(d) {
+function onGroupClick(d) {
     svg
             .append("rect")
             .attr("width", 60)
@@ -84,7 +87,8 @@ function onElementClick(d) {
             .attr("x", 100 + offsetX)
             .attr("y", 160 + offsetY)
             .attr("fill", function(){ return d.color;});
-            svg.append("g")
+    svg
+            .append("g")
             .append("rect")
             .attr("width", 305)
             .attr("height", 55)
@@ -94,7 +98,7 @@ function onElementClick(d) {
 }
 
 //elements on the right
-function onRightElementClick(d) {
+function onRightGroupClick(d) {
     svg
             .append("rect")
             .attr("width", 60)
