@@ -18,56 +18,6 @@ var groups = [
     {name: "bacteries", color: " #DDA0DD"},
     {name: "animals", color: "#32CD32"}];
 
-//elements in groups 
-//"water"
-groups[0] = [
-    {name: "water", color: "#00BFFF"},
-    {name: "swamp", color: "#006400"},
-    {name: "quicksylver", color: "#C0C0C0"}];
-
-//"fire"
-groups[1] = [
-    {name: "fire", color: "#FF0000"},
-    {name: "lava", color: "#8B0000"}];
-
-//"air"
-groups[2] = [
-    {name: "air", color: "#FF0000"},
-    {name: "steam", color: "#8B0000"},
-    {name: "dust", color: "#8B0000"},
-    {name: "ash", color: "#8B0000"},
-    {name: "storm", color: "#8B0000"}];
-
-//"earth"
-groups[3] = [
-    {name: "earth", color: "#FF0000"},
-    {name: "stone", color: "#8B0000"},
-    {name: "sand", color: "#8B0000"},
-    {name: "glass", color: "#8B0000"},
-    {name: "metal", color: "#8B0000"}];
-
-//"energy"
-groups[4] = [
-    {name: "energy", color: "#FF0000"},
-    {name: "life", color: "#8B0000"},
-    {name: "egg", color: "#8B0000"}];
-
-//"bacteries"
-groups[5] = [
-    {name: "weeds", color: "#FF0000"},
-    {name: "mushroom", color: "#8B0000"},
-    {name: "bacteria", color: "#8B0000"},
-    {name: "plankton", color: "#8B0000"},
-    {name: "worm", color: "#8B0000"}];
-
-//"animals"
-groups[6] = [
-    {name: "fish", color: "#FF0000"},
-    {name: "whale", color: "#8B0000"},
-    {name: "snake", color: "#8B0000"},
-    {name: "bird", color: "#8B0000"},
-    {name: "turtle", color: "#8B0000"},
-    {name: "lizard", color: "#8B0000"}];
 
 
 var svg = d3.select("body")
