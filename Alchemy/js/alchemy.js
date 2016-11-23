@@ -11,41 +11,47 @@ window.onload = function alchemy(){
 //groups of elements
 var groups = [
     {name: "water", color: "#87CEFA", subelements: [
-        {name: "water", color: "#87CEFA"},
-        {name: "swamp", color: "#87CEFA"},
-        {name: "quicksylver", color: "#87CEFA"}]}, 
+        {name: "water", color: "#87CEFA", discovered: true},
+        {name: "swamp", color: "#87CEFA", discovered: false},
+        {name: "quicksylver", color: "#87CEFA", discovered: false}]}, 
+
     {name: "fire", color: " #FF4500", subelements: [
-        {name: "fire", color: "#FF4500"},
-        {name: "lava", color: "#FF4500"}]},
+        {name: "fire", color: "#FF4500", discovered: true},
+        {name: "lava", color: "#FF4500", discovered: false}]},
+
     {name: "air", color: "#F8F8FF", subelements: [
-        {name: "air", color: "#F8F8FF"},
-        {name: "steam", color: "#F8F8FF"},
-        {name: "dust", color: "#F8F8FF"},
-        {name: "ash", color: "#F8F8FF"},
-        {name: "storm", color: "#F8F8FF"}]},
+        {name: "air", color: "#F8F8FF", discovered: true},
+        {name: "steam", color: "#F8F8FF", discovered: false},
+        {name: "dust", color: "#F8F8FF", discovered: false},
+        {name: "ash", color: "#F8F8FF", discovered: false},
+        {name: "storm", color: "#F8F8FF", discovered: false}]},
+
     {name: "earth", color: "#CD853F", subelements: [
-        {name: "earth", color: "#CD853F"},
-        {name: "stone", color: "#CD853F"},
-        {name: "sand", color: "#CD853F"},
-        {name: "glass", color: "#CD853F"},
-        {name: "metal", color: "#CD853F"}]},
+        {name: "earth", color: "#CD853F", discovered: true},
+        {name: "stone", color: "#CD853F", discovered: false},
+        {name: "sand", color: "#CD853F", discovered: false},
+        {name: "glass", color: "#CD853F", discovered: false},
+        {name: "metal", color: "#CD853F", discovered: false}]},
+
     {name: "energy", color: "#A9A9A9", subelements: [
-        {name: "energy", color: "#A9A9A9"},
-        {name: "life", color: "#A9A9A9"},
-        {name: "egg", color: "#A9A9A9"}]}, 
+        {name: "energy", color: "#A9A9A9", discovered: false},
+        {name: "life", color: "#A9A9A9", discovered: false},
+        {name: "egg", color: "#A9A9A9", discovered: false}]}, 
+
     {name: "bacteries", color: " #DDA0DD", subelements: [
-        {name: "weeds", color: "#DDA0DD"},
-        {name: "mushroom", color: "#DDA0DD"},
-        {name: "bacteria", color: "#DDA0DD"},
-        {name: "plankton", color: "#DDA0DD"},
-        {name: "worm", color: "#DDA0DD"}]},
+        {name: "weeds", color: "#DDA0DD", discovered: false},
+        {name: "mushroom", color: "#DDA0DD", discovered: false},
+        {name: "bacteria", color: "#DDA0DD", discovered: false},
+        {name: "plankton", color: "#DDA0DD", discovered: false},
+        {name: "worm", color: "#DDA0DD", discovered: false}]},
+
     {name: "animals", color: "#32CD32", subelements: [
-        {name: "fish", color: "#32CD32"},
-        {name: "whale", color: "#32CD32"},
-        {name: "snake", color: "#32CD32"},
-        {name: "bird", color: "#32CD32"},
-        {name: "turtle", color: "#32CD32"},
-        {name: "lizard", color: "#32CD32"}]}];
+        {name: "fish", color: "#32CD32", discovered: false},
+        {name: "whale", color: "#32CD32", discovered: false},
+        {name: "snake", color: "#32CD32", discovered: false},
+        {name: "bird", color: "#32CD32", discovered: false},
+        {name: "turtle", color: "#32CD32", discovered: false},
+        {name: "lizard", color: "#32CD32", discovered: false}]}];
 
 var svg = d3.select("body")
     .append("svg")
@@ -66,6 +72,14 @@ svg.append("g")
         .data(groups)
         .enter()
         .append("rect")
+        .attr("visibility", function (group) {
+            for (var i=0; i<group.subelements.length; i++){
+                if (group.subelements[i].discovered) { 
+                    return "visible";
+                }
+            }
+            return "hidden";
+        })
         .attr("width", 45)
         .attr("height", 45)
         .attr("x", offsetX)
@@ -80,6 +94,14 @@ svg.append("g")
         .data(groups)
         .enter()
         .append("rect")
+        .attr("visibility", function (group) {
+            for (var i=0; i<group.subelements.length; i++){
+                if (group.subelements[i].discovered) { 
+                    return "visible";
+                }
+            }
+            return "hidden";
+        })
         .attr("width", 45)
         .attr("height", 45)
         .attr("x", 780 + offsetX)
@@ -131,6 +153,8 @@ function onGroupClick(d) {
             .data(d.subelements)
             .enter()
             .append("rect")
+            .attr("visibility", function (subelement) {
+                return subelement.discovered ? "visible": "hidden";})
             .attr("width", 40)
             .attr("height", 40)
             .attr("x", function(d, i) {return i*45 + offsetX + 107;})
@@ -161,6 +185,8 @@ function onRightGroupClick(d) {
             .data(d.subelements)
             .enter()
             .append("rect")
+            .attr("visibility", function (subelement) {
+                return subelement.discovered ? "visible": "hidden";})
             .attr("width", 40)
             .attr("height", 40)
             .attr("x", function(d, i) {return i*45 + offsetX + 453;})
