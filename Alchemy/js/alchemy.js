@@ -3,55 +3,61 @@
 window.onload = function alchemy(){
     var width = 1000;
     var height = 700;
-    var cellSize = 17; // cell size
     var offsetX = 10;
     var offsetY = 10;
-
+    var groupsquare = 45;
+    var square = 40;
+    var mainsquare = 60;
+    var margin = 5;
+    var leftElement;
+    var rightElement;
 
 //groups of elements
 var groups = [
     {name: "water", color: "#87CEFA", subelements: [
-        {name: "water", color: "#87CEFA", discovered: true},
-        {name: "swamp", color: "#87CEFA", discovered: false},
-        {name: "quicksylver", color: "#87CEFA", discovered: false}]}, 
+        {name: "water", color: "#48D1CC", discovered: true},
+        {name: "swamp", color: "#156325", discovered: false},
+        {name: "quicksylver", color: "#DCDCDC", discovered: false}]}, 
 
-    {name: "fire", color: " #FF4500", subelements: [
+    {name: "fire", color: " #FF6347", subelements: [
         {name: "fire", color: "#FF4500", discovered: true},
-        {name: "lava", color: "#FF4500", discovered: false}]},
+        {name: "lava", color: "#B22222", discovered: false}]},
 
     {name: "air", color: "#F8F8FF", subelements: [
-        {name: "air", color: "#F8F8FF", discovered: true},
-        {name: "steam", color: "#F8F8FF", discovered: false},
-        {name: "dust", color: "#F8F8FF", discovered: false},
-        {name: "ash", color: "#F8F8FF", discovered: false},
-        {name: "storm", color: "#F8F8FF", discovered: false}]},
+        {name: "air", color: "#F0FFF0", discovered: true},
+        {name: "steam", color: "#F0FFFF", discovered: false},
+        {name: "dust", color: "#FFF8DC", discovered: false},
+        {name: "ash", color: "#A9A9A9", discovered: false},
+        {name: "storm", color: "#B0E0E6", discovered: false}]},
 
     {name: "earth", color: "#CD853F", subelements: [
-        {name: "earth", color: "#CD853F", discovered: true},
-        {name: "stone", color: "#CD853F", discovered: false},
-        {name: "sand", color: "#CD853F", discovered: false},
-        {name: "glass", color: "#CD853F", discovered: false},
-        {name: "metal", color: "#CD853F", discovered: false}]},
+        {name: "earth", color: "#D2691E", discovered: true},
+        {name: "stone", color: "#696969", discovered: false},
+        {name: "sand", color: "#FFD700", discovered: false},
+        {name: "glass", color: "#F5FFFA", discovered: false},
+        {name: "metal", color: "#C0C0C0", discovered: false}]},
 
-    {name: "energy", color: "#A9A9A9", subelements: [
-        {name: "energy", color: "#A9A9A9", discovered: false},
-        {name: "life", color: "#A9A9A9", discovered: false},
-        {name: "egg", color: "#A9A9A9", discovered: false}]}, 
+    {name: "energy", color: "#FFEBCD", subelements: [
+        {name: "energy", color: "#FFDEAD", discovered: false},
+        {name: "life", color: "#FF1493", discovered: false},
+        {name: "egg", color: "#FFF0F5", discovered: false}]}, 
 
-    {name: "bacteries", color: " #DDA0DD", subelements: [
-        {name: "weeds", color: "#DDA0DD", discovered: false},
-        {name: "mushroom", color: "#DDA0DD", discovered: false},
-        {name: "bacteria", color: "#DDA0DD", discovered: false},
-        {name: "plankton", color: "#DDA0DD", discovered: false},
-        {name: "worm", color: "#DDA0DD", discovered: false}]},
+    {name: "bacteries", color: "#DDA0DD", subelements: [
+        {name: "weeds", color: "#BA55D3", discovered: false},
+        {name: "mushroom", color: "#FF00FF", discovered: false},
+        {name: "bacteria", color: "#EE82EE", discovered: false},
+        {name: "plankton", color: "#800080", discovered: false},
+        {name: "worm", color: "#D8BFD8", discovered: false}]},
 
     {name: "animals", color: "#32CD32", subelements: [
-        {name: "fish", color: "#32CD32", discovered: false},
-        {name: "whale", color: "#32CD32", discovered: false},
-        {name: "snake", color: "#32CD32", discovered: false},
-        {name: "bird", color: "#32CD32", discovered: false},
-        {name: "turtle", color: "#32CD32", discovered: false},
-        {name: "lizard", color: "#32CD32", discovered: false}]}];
+        {name: "fish", color: "#008000", discovered: false},
+        {name: "whale", color: "#98FB98", discovered: false},
+        {name: "snake", color: "#00FF00", discovered: false},
+        {name: "bird", color: "#00FF7F", discovered: false},
+        {name: "turtle", color: "#3CB371", discovered: false},
+        {name: "lizard", color: "#9ACD32", discovered: false}]}];
+
+var recipies = { air:{ earth: groups[2].subelements[2] }};
 
 var svg = d3.select("body")
     .append("svg")
@@ -80,10 +86,10 @@ svg.append("g")
             }
             return "hidden";
         })
-        .attr("width", 45)
-        .attr("height", 45)
+        .attr("width", groupsquare)
+        .attr("height", groupsquare)
         .attr("x", offsetX)
-        .attr("y", function(d, i) {return i*55 + offsetY;})
+        .attr("y", function(d, i) {return i*(groupsquare + 2*margin) + offsetY;})
         .attr("fill", function(d){return d.color;})
         .on("click", onGroupClick);
 
@@ -102,10 +108,10 @@ svg.append("g")
             }
             return "hidden";
         })
-        .attr("width", 45)
-        .attr("height", 45)
+        .attr("width", groupsquare)
+        .attr("height", groupsquare)
         .attr("x", 780 + offsetX)
-        .attr("y", function(d, i) {return i*55 + offsetY;})
+        .attr("y", function(d, i) {return i*(groupsquare + 2*margin) + offsetY;})
         .attr("fill", function(d){ return d.color;})
         .on("click", onRightGroupClick);
 
@@ -134,16 +140,16 @@ function onGroupClick(d) {
     //display group on the game field
     svg
             .append("rect")
-            .attr("width", 60)
-            .attr("height", 60)
+            .attr("width", mainsquare)
+            .attr("height", mainsquare)
             .attr("x", 100 + offsetX)
             .attr("y", 160 + offsetY)
-            .attr("fill", function(){ return d.color;});
+            .attr("fill", function(){ return d.subelements[0].color;});
     svg
             .append("g")
             .append("rect")
-            .attr("width", 279)
-            .attr("height", 54)
+            .attr("width", (square+margin)*6 + margin)
+            .attr("height", square + 2 * margin)
             .attr("x", 100 + offsetX)
             .attr("y", 50 + offsetY)
             .attr("fill", "#000000");
@@ -155,27 +161,28 @@ function onGroupClick(d) {
             .append("rect")
             .attr("visibility", function (subelement) {
                 return subelement.discovered ? "visible": "hidden";})
-            .attr("width", 40)
-            .attr("height", 40)
-            .attr("x", function(d, i) {return i*45 + offsetX + 107;})
-            .attr("y", 57 + offsetY)
-            .attr("fill", function(d){ return d.color;});
+            .attr("width", square)
+            .attr("height", square)
+            .attr("x", function(d, i) {return i*(square+margin) + offsetX + 105;})
+            .attr("y", 55 + offsetY)
+            .attr("fill", function(d){ return d.color;})
+            .on("click", onElementClick);
 }
 
 //elements on the right
 function onRightGroupClick(d) {
     svg
             .append("rect")
-            .attr("width", 60)
-            .attr("height", 60)
+            .attr("width", mainsquare)
+            .attr("height", mainsquare)
             .attr("x", 665 + offsetX)
             .attr("y", 160 + offsetY)
             .attr("fill", function(){ return d.color;});
     svg
             .append("g")
             .append("rect")
-            .attr("width", 279)
-            .attr("height", 54)
+            .attr("width", (square+margin)*6 + margin)
+            .attr("height", square + 2 * margin)
             .attr("x", 446 + offsetX)
             .attr("y", 270 + offsetY)
             .attr("fill", "#000000");
@@ -187,11 +194,39 @@ function onRightGroupClick(d) {
             .append("rect")
             .attr("visibility", function (subelement) {
                 return subelement.discovered ? "visible": "hidden";})
-            .attr("width", 40)
-            .attr("height", 40)
-            .attr("x", function(d, i) {return i*45 + offsetX + 453;})
-            .attr("y", 277 + offsetY)
-            .attr("fill", function(d){ return d.color;});
+            .attr("width", square)
+            .attr("height", square)
+            .attr("x", function(d, i) {return i*(square+margin) + offsetX + 451;})
+            .attr("y", 275 + offsetY)
+            .attr("fill", function(d){ return d.color;})
+            .on("click", onRightElementClick);
+}
+
+function onElementClick(d){
+    leftElement = d;
+    var result = tryMergeElements();
+}
+
+function onRightElementClick(d) {
+    rightElement = d;
+    var result = tryMergeElements();
+}
+
+function tryMergeElements(){
+    if (leftElement && rightElement) {
+        var ingridients = [leftElement, rightElement];
+        ingridients.sort();
+        var result = recipies[ingridients[0].name];
+        if(result){
+            result = result[ingridients[1].name];
+            if(result){
+                result.discovered = true;
+                leftElement = null;
+                rightElement = null;
+                return result;
+            }
+        }
+    }
 }
 
 };

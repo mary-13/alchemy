@@ -1,0 +1,25 @@
+dust = earth + air
+energy = air + fire
+swamp = water + earth
+quicksylver = water + metal
+lava = earth + fire
+steam = lava + water = water + air
+ash = fire + worm = fire + snake
+storm = air + energy
+stone = lava + water = lava + air
+sand = stone + water
+glass = sand + fire
+metal = stone + fire
+life = swamp + energy
+egg = snake + snake = stone + life
+weeds = life + water
+mushrooms = weeds + earth
+bacteria = life + swamp
+plancton = bacteria + water
+worm = bacteria + swamp
+fish = bacteria + plankton
+whale = fish + plankton
+snake = worm + swamp
+bird = egg + air
+turtle = egg + sand
+lizard = worm + snake
