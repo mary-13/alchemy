@@ -10,13 +10,42 @@ window.onload = function alchemy(){
 
 //groups of elements
 var groups = [
-    {name: "water", color: "#87CEFA"}, 
-    {name: "fire", color: " #FF4500"},
-    {name: "air", color: "#F8F8FF"},
-    {name: "earth", color: "#CD853F"},
-    {name: "energy", color: "#A9A9A9"}, 
-    {name: "bacteries", color: " #DDA0DD"},
-    {name: "animals", color: "#32CD32"}];
+    {name: "water", color: "#87CEFA", subelements: [
+        {name: "water", color: "#87CEFA"},
+        {name: "swamp", color: "#87CEFA"},
+        {name: "quicksylver", color: "#87CEFA"}]}, 
+    {name: "fire", color: " #FF4500", subelements: [
+        {name: "fire", color: "#FF4500"},
+        {name: "lava", color: "#FF4500"}]},
+    {name: "air", color: "#F8F8FF", subelements: [
+        {name: "air", color: "#F8F8FF"},
+        {name: "steam", color: "#F8F8FF"},
+        {name: "dust", color: "#F8F8FF"},
+        {name: "ash", color: "#F8F8FF"},
+        {name: "storm", color: "#F8F8FF"}]},
+    {name: "earth", color: "#CD853F", subelements: [
+        {name: "earth", color: "#CD853F"},
+        {name: "stone", color: "#CD853F"},
+        {name: "sand", color: "#CD853F"},
+        {name: "glass", color: "#CD853F"},
+        {name: "metal", color: "#CD853F"}]},
+    {name: "energy", color: "#A9A9A9", subelements: [
+        {name: "energy", color: "#A9A9A9"},
+        {name: "life", color: "#A9A9A9"},
+        {name: "egg", color: "#A9A9A9"}]}, 
+    {name: "bacteries", color: " #DDA0DD", subelements: [
+        {name: "weeds", color: "#DDA0DD"},
+        {name: "mushroom", color: "#DDA0DD"},
+        {name: "bacteria", color: "#DDA0DD"},
+        {name: "plankton", color: "#DDA0DD"},
+        {name: "worm", color: "#DDA0DD"}]},
+    {name: "animals", color: "#32CD32", subelements: [
+        {name: "fish", color: "#32CD32"},
+        {name: "whale", color: "#32CD32"},
+        {name: "snake", color: "#32CD32"},
+        {name: "bird", color: "#32CD32"},
+        {name: "turtle", color: "#32CD32"},
+        {name: "lizard", color: "#32CD32"}]}];
 
 var svg = d3.select("body")
     .append("svg")
@@ -78,58 +107,6 @@ svg
         .attr("y", 385 + offsetY)
         .attr("fill", "#DAA520");
 
-//elements in groups 
-//"water"
-var water = [
-    {name: "water", color: "#87CEFA"},
-    {name: "swamp", color: "#87CEFA"},
-    {name: "quicksylver", color: "#87CEFA"}];
-
-//"fire"
-var fire = [
-    {name: "fire", color: "#FF4500"},
-    {name: "lava", color: "#FF4500"}];
-
-//"air"
-var air = [
-    {name: "air", color: "#F8F8FF"},
-    {name: "steam", color: "#F8F8FF"},
-    {name: "dust", color: "#F8F8FF"},
-    {name: "ash", color: "#F8F8FF"},
-    {name: "storm", color: "#F8F8FF"}];
-
-//"earth"
-var earth = [
-    {name: "earth", color: "#CD853F"},
-    {name: "stone", color: "#CD853F"},
-    {name: "sand", color: "#CD853F"},
-    {name: "glass", color: "#CD853F"},
-    {name: "metal", color: "#CD853F"}];
-
-//"energy"
-var energy = [
-    {name: "energy", color: "#A9A9A9"},
-    {name: "life", color: "#A9A9A9"},
-    {name: "egg", color: "#A9A9A9"}];
-
-//"bacteries"
-var bacteries = [
-    {name: "weeds", color: "#DDA0DD"},
-    {name: "mushroom", color: "#DDA0DD"},
-    {name: "bacteria", color: "#DDA0DD"},
-    {name: "plankton", color: "#DDA0DD"},
-    {name: "worm", color: "#DDA0DD"}];
-
-//"animals"
-var animals = [
-    {name: "fish", color: "#32CD32"},
-    {name: "whale", color: "#32CD32"},
-    {name: "snake", color: "#32CD32"},
-    {name: "bird", color: "#32CD32"},
-    {name: "turtle", color: "#32CD32"},
-    {name: "lizard", color: "#32CD32"}];
-
-
 //elements on the left
 function onGroupClick(d) {
     //display group on the game field
@@ -151,33 +128,7 @@ function onGroupClick(d) {
     
     svg.append("g")
             .selectAll("rect")
-            .data(function(d, i){switch (i) 
-        {
-        case 0:
-            "water";
-            break;
-        case 1:
-            "fire";
-            break;
-        case 2:
-            "air";
-            break;
-        case 3:
-            "earth";
-            break;
-        case 4:
-            "energy";
-            break;
-        case 5:
-            "bacteries";
-            break;
-        case 6:
-            "animals";
-            break;
-        default:
-            message = "error!!!";
-        };
-    })
+            .data(d.subelements)
             .enter()
             .append("rect")
             .attr("width", 40)
@@ -207,7 +158,7 @@ function onRightGroupClick(d) {
     
     svg.append("g")
             .selectAll("rect")
-            .data(water)
+            .data(d.subelements)
             .enter()
             .append("rect")
             .attr("width", 40)
