@@ -239,7 +239,11 @@ window.onload = function alchemy(){
 	function tryMergeElements(){
 		if (leftElement && rightElement) {
 			var ingridients = [leftElement, rightElement];
-			ingridients.sort();
+			ingridients.sort(function(a, b){
+                                        if(a.name < b.name) return -1;
+                                        if(a.name > b.name) return 1;
+                                        return 0;
+}                                       );
 			var result = recipies[ingridients[0].name];
 			if(result){
 				result = result[ingridients[1].name];
