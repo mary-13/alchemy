@@ -12,41 +12,42 @@ window.onload = function alchemy(){
 
 	//groups of elements
 	var groups = [
+            //group[0]
 		{name: "water", color: "#87CEFA", subelements: [
 			{name: "water", color: "#48D1CC", discovered: true},
 			{name: "swamp", color: "#156325", discovered: false},
 			{name: "quicksylver", color: "#DCDCDC", discovered: false}]}, 
-
+            //group[1]
 		{name: "fire", color: " #FF6347", subelements: [
 			{name: "fire", color: "#FF4500", discovered: true},
 			{name: "lava", color: "#B22222", discovered: false}]},
-
+            //group[2]
 		{name: "air", color: "#F8F8FF", subelements: [
 			{name: "air", color: "#F0FFF0", discovered: true},
 			{name: "steam", color: "#F0FFFF", discovered: false},
 			{name: "dust", color: "#FFF8DC", discovered: false},
 			{name: "ash", color: "#A9A9A9", discovered: false},
 			{name: "storm", color: "#B0E0E6", discovered: false}]},
-
+            //group[3]
 		{name: "earth", color: "#CD853F", subelements: [
 			{name: "earth", color: "#D2691E", discovered: true},
 			{name: "stone", color: "#696969", discovered: false},
 			{name: "sand", color: "#FFD700", discovered: false},
 			{name: "glass", color: "#F5FFFA", discovered: false},
 			{name: "metal", color: "#C0C0C0", discovered: false}]},
-
+            //group[4]
 		{name: "energy", color: "#FFEBCD", subelements: [
 			{name: "energy", color: "#FFDEAD", discovered: false},
 			{name: "life", color: "#FF1493", discovered: false},
 			{name: "egg", color: "#FFF0F5", discovered: false}]}, 
-
+            //group[5]
 		{name: "bacteries", color: "#DDA0DD", subelements: [
 			{name: "weeds", color: "#BA55D3", discovered: false},
 			{name: "mushroom", color: "#FF00FF", discovered: false},
 			{name: "bacteria", color: "#EE82EE", discovered: false},
 			{name: "plankton", color: "#800080", discovered: false},
 			{name: "worm", color: "#D8BFD8", discovered: false}]},
-
+            //group[6]
 		{name: "animals", color: "#32CD32", subelements: [
 			{name: "fish", color: "#008000", discovered: false},
 			{name: "whale", color: "#98FB98", discovered: false},
@@ -55,7 +56,34 @@ window.onload = function alchemy(){
 			{name: "turtle", color: "#3CB371", discovered: false},
 			{name: "lizard", color: "#9ACD32", discovered: false}]}];
 
-	var recipies = { air:{ earth: groups[2].subelements[2] }};
+	var recipies =  {   air:{ earth: groups[2].subelements[2],
+                                  fire: groups[4].subelements[0],
+                                  water: groups[2].subelements[1],
+                                  lava: groups[3].subelements[1],
+                                  egg: groups[6].subelements[3] },
+                            bacteria:{ water: groups[5].subelements[3],
+                                       swamp: groups[5].subelements[4],
+                                       plankton: groups[6].subelements[0] },
+                            earth:{ water: groups[0].subelements[1],
+                                    fire: groups[1].subelements[1],
+                                    weeds: groups[5].subelements[1] },
+                            egg:{ sand: groups[6].subelements[4] },
+                            energy:{ swamp: groups[4].subelements[1] },
+                            fire:{ worm: groups[2].subelements[3],
+                                   snake: groups[2].subelements[3],
+                                   sand: groups[3].subelements[3],
+                                   stone: groups[3].subelements[4] },
+                            fish:{ plankton: groups[6].subelements[1] },
+                            lava:{ water: groups[3].subelements[1] },
+                            life:{ stone: groups[4].subelements[2],
+                                   water: groups[5].subelements[0],
+                                   swamp: groups[5].subelements[2]},
+                            metal:{ water: groups[0].subelements[2] },
+                            snake:{ snake: groups[4].subelements[2],
+                                    worm: groups[6].subelements[5] },
+                            stone:{ water: groups[3].subelements[2] },
+                            swamp:{ worm: groups[6].subelements[2] }
+                        };
 
 	var svg = d3.select("body")
 		.append("svg")
